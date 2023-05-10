@@ -1,3 +1,4 @@
+
 html{
     background-color: #d7d6d6;
 }
@@ -29,7 +30,9 @@ body{
 }
 
 .options-container{
-    background-color: burlywood;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
     width: 600px;
     height : 700px;
 }
@@ -37,15 +40,11 @@ body{
 /* klasse voor het stukje */
 
 .piece{
-    position: absolute;
+    position: relative;
     width: 200px;
     height: 200px;
 }
 
-.circular{
-    width: 200px;
-    height: 200px;
-}
 
 
 /* klasse voor bordje nummer1 */
@@ -56,7 +55,3 @@ body{
 
 
 /* klasse waneer stukje het bord bezet */
-
-.taken{
-background-color: pink;
-}

@@ -1,4 +1,5 @@
 class Circle {
+
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -7,6 +8,8 @@ class Circle {
         this.element.style.left = `${this.x}px`;
         this.element.style.top = `${this.y}px`;
     }
+
+
 
     draw(parentElement){
         parentElement.append(this.element);

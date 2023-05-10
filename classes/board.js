@@ -1,5 +1,7 @@
 import Circle from "./circle.js";
 
+let id = 0;
+
 class Board{
     constructor(board) {
         this.element = board;
@@ -17,6 +19,8 @@ class Board{
 
             // cirle aanmaken en toevoegen aan array
             const circle = new Circle(x, y);
+            circle.element.id = `${id}`;
+            id++;
             this.circles.push(circle);
 
             // de x-coordinaat updaten
@@ -37,8 +41,8 @@ class Board{
 
     drawPattern(piece , cirkelTarget){
         //positie bepalen van het stukje
-        let currentX = piece.currentX + cirkelTarget.x;
-        let currentY = piece.currentY + cirkelTarget.y;
+        let currentX = piece.currentX + cirkelTarget.x + piece.initialLeft;
+        let currentY = piece.currentY + cirkelTarget.y + piece.initialTop;
 
         let boardRect = this.element.getBoundingClientRect();
         let boardX = boardRect.left;
@@ -69,25 +73,55 @@ class Board{
         console.log("patroon plaatsen");
         console.log(`target cirkel: x${cirkel.x}, y${cirkel.y}`);
 
-        for(let i = 0 ; i < 4 ; i++){
+        //controleren of alle punten in het bord ligt
+        for(let i = 0 ; i < piece.circles.length ; i++){
+            let x = cirkel.x + piece.posities[i][0]*100;
+            let y = cirkel.y + piece.posities[i][1]*100;
+
+            if(x > 400 || x < 0 || y > 400 || y < 0){
+                console.log("Niet in het bord geplaatst");
+                return;
+            }
+
+        }
+
+
+
+        for(let i = 0 ; i < piece.circles.length ; i++){
+
 
 
             // circle = [0,0]
-            let x = cirkelTarget.x + piece.posities[i][0]*100;
-            let y = cirkelTarget.y + piece.posities[i][1]*100;
-            console.log(cirkelTarget.x, cirkelTarget.y);
+            let x = cirkel.x + piece.posities[i][0]*100;
+            let y = cirkel.y + piece.posities[i][1]*100;
             console.log(`${x}`, `${y}`);
+
 
 
             for(let hallo of this.circles){
                 if(x === hallo.x && y === hallo.y){
                     hallo.element.classList.add("taken");
+                    hallo.element.style.backgroundColor = piece.color;
                 }
             }
 
         }
 
         return true;
+
+    }
+
+    checkGame() {
+
+        let didYouWin = true;
+
+        this.circles.forEach(circle => {
+            if(!(circle.element.classList.contains('taken') || circle.element.classList.contains('danger') )){
+                didYouWin = false;
+            }
+        })
+
+        return didYouWin;
 
     }
 
