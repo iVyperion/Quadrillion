@@ -3,7 +3,7 @@ import Circle from "./circle.js";
 let id = 0;
 
 class Board{
-    constructor(board) {
+    constructor(board, id) {
         this.element = board;
         this.circles = [];
         this.width = 600;
@@ -11,10 +11,38 @@ class Board{
         let x = 50;
         let y = 50;
         for(let i = 0 ; i < 16 ; i++){
-            // controleren of er een nieuwe lijn moet gestart worden
-            if(i === 4 || i === 8 || i === 12){
-                x = 50;
-                y += 100;
+            
+            
+
+            // No place spots
+            switch(id) {
+                case 1:
+                    if (i === 14) {
+
+                    }
+                    break;
+                case 2:
+                    if (i === 13 || i === 14) {
+
+                    }
+                    break;
+                case 3:
+                    if (i === 0 || i === 14) {
+
+                    }
+                    break;
+                case 4:
+                    if (i === 12) {
+                        
+                    }
+                    break;
+                default:
+                    // controleren of er een nieuwe lijn moet gestart worden
+                    if(i === 4 || i === 8 || i === 12){
+                        x = 50;
+                        y += 100;
+                    }
+                    break;
             }
 
             // cirle aanmaken en toevoegen aan array
