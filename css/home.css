@@ -1,0 +1,36 @@
+.intro {
+
+}
+
+.home_box {
+    border: var(--primary) 1px solid;
+    border-radius: 50px 0px 50px 0px;
+    width: fit-content;
+    height: fit-content;
+    margin: 0 5rem;
+}
+
+.home_box img {
+    border-radius: 50px 0px;
+    height: fit-content;
+}
+
+.home_box p {
+    color: var(--text);
+    margin: .5rem;
+}
+
+.home_box button {
+    margin: .5rem;
+    padding: .5rem 2.5rem;
+    width: 80%;
+    background-color: var(--primary);
+    border: var(--secondary) 1px solid;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .home_box {
+        margin: auto;
+    }
+}

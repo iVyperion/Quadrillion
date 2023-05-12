@@ -7,6 +7,11 @@ class Circle {
         this.element.classList.add('circle');
         this.element.style.left = `${this.x}px`;
         this.element.style.top = `${this.y}px`;
+        /*if (isUsable) {
+            this.element.style.color = '#D9D9D9';
+        } else {
+            this.element.style.color = '#4B4B4B';
+        }*/
     }
 
 

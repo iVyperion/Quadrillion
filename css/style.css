@@ -2,6 +2,7 @@
     --primary: #99D0FF;
     --secondary: #1156BC;
     --bg: #E3F3FF;
+    --text: black;
 }
 
 /* Utility, Atoms, ... */
@@ -16,6 +17,11 @@ body {
 
 main {
     margin-top: 2rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* HEADER */
@@ -38,8 +44,16 @@ header p {
     display: none;
 }
 
+nav ul {
+    display: none;
+}
+
 .hamburger {
-    margin: 0 1rem;
+    margin: 0 .5rem;
+}
+
+nav {
+    margin: 0 2.5rem;
 }
 
 .bar {
@@ -54,53 +68,46 @@ header p {
 
 /* MAIN */
 
-/* GAME */
-
-.gameboard{
-    width: 400px;
-    height: 400px;
-    background-color: #d8d7d7;
-    position: relative;
-
+.mobile-disapear {
+    display: none;   
 }
-
-.circle{
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.9);
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-
-}
-
-.options-container{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    width: 600px;
-    height : 700px;
-}
-
-
-.piece{
-    position: relative;
-    width: 200px;
-    height: 200px;
-}
-
-
-.board1{
-    border-radius: 15px;
-    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-}
-
-
 
 /* BREAKPOINTS */
 @media (min-width: 768px) {
+    .mobile-disapear {
+        display: block;
+    }
+    
+    header p {
+        font-size: 2.25rem;
+        color: var(--primary);
+    }
 
+    .logo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+        flex: 1;
+        gap: 2.5rem;
+    }
+
+    nav li {
+        list-style: none;
+        font-size: 1.5rem;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: var(--primary);
+    }
+
+    .hamburger {
+        display: none;
+    }
 }
 
 /* ANIMATIONS */

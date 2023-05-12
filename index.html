@@ -6,22 +6,27 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="classes/main.js" type="module"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
     <title>Quadrillion</title>
 </head>
 
 <body>
     <header>
-        <img src="logo.png" alt="Quadrillion Logo">
-        <p>uadrillion</p>
+        <div class="logo">
+            <img src="logo.png" alt="Quadrillion Logo">
+            <p class="mobile-disapear">uadrillion</p>
+        </div>
         <nav>
             <ul>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+                <li><a href="">Home</a></li>
+                <li><a href="">Play</a></li>
+                <li><a href="">Levels</a></li>
+                <li><a href="">Score</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -31,9 +36,20 @@
         </nav>
     </header>
     <main>
-        <div class="gameboard"></div>
-
-        <div class="options-container"></div>
+        <section class="intro">
+            <div class="home_box">
+                <img src="images/Quadrillion_preview.png" alt="Quadrillion preview">
+                <div>
+                    <div class="logo mobile-disapear">
+                        <img src="logo.png" alt="Quadrillion Logo">
+                        <p>uadrillion</p>
+                    </div>
+                    <p>Ontelbaar veel opdrachten en oplossingen… maar kan jij er één vinden?</p>
+                    <button>Play</button>
+                </div>
+                
+            </div>
+        </section>
     </main>
 </body>
 
