@@ -31,6 +31,7 @@
 
 @media (min-width: 768px) {
     .home_box {
+        display: flex;
         margin: auto;
     }
 }
