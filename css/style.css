@@ -1,8 +1,10 @@
 :root {
     --primary: #99D0FF;
     --secondary: #1156BC;
+    --tertairy: #A6A6A6;
     --bg: #E3F3FF;
     --text: black;
+    --text-subtle: #777777;
 }
 
 /* Utility, Atoms, ... */
@@ -75,6 +77,10 @@ nav {
 
 .mobile-disapear {
     display: none;   
+}
+
+.subtle {
+    color: var(--text-subtle)
 }
 
 /* BREAKPOINTS */
