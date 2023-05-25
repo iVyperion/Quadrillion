@@ -1,48 +1,24 @@
 import Circle from "./circle.js";
+import boardArray from "./main.js";
 
 let id = 0;
 
 class Board{
-    constructor(board, id) {
+    constructor(board, xBord, yBord, positieDanger) {
+        this.positieDanger = positieDanger;
         this.element = board;
         this.circles = [];
-        this.width = 600;
-        this.height = 600;
-        let x = 50;
-        let y = 50;
+        this.width =300;
+        this.height = 300;
+        this.xBord = xBord;
+        this.yBord = yBord;
+        let x = 25;
+        let y = 25;
         for(let i = 0 ; i < 16 ; i++){
-            
-            
-
-            // No place spots
-            switch(id) {
-                case 1:
-                    if (i === 14) {
-
-                    }
-                    break;
-                case 2:
-                    if (i === 13 || i === 14) {
-
-                    }
-                    break;
-                case 3:
-                    if (i === 0 || i === 14) {
-
-                    }
-                    break;
-                case 4:
-                    if (i === 12) {
-                        
-                    }
-                    break;
-                default:
-                    // controleren of er een nieuwe lijn moet gestart worden
-                    if(i === 4 || i === 8 || i === 12){
-                        x = 50;
-                        y += 100;
-                    }
-                    break;
+            // controleren of er een nieuwe lijn moet gestart worden
+            if(i === 4 || i === 8 || i === 12){
+                x = 25;
+                y += 50;
             }
 
             // cirle aanmaken en toevoegen aan array
@@ -51,9 +27,19 @@ class Board{
             id++;
             this.circles.push(circle);
 
+            this.positieDanger.forEach(danger=>{
+                if(circle.x === danger[0]*50 +25 && circle.y === danger[1]*50+25){
+                    circle.element.classList.contains('taken');
+                    circle.element.style.backgroundColor  = 'black';
+                }
+            })
+
             // de x-coordinaat updaten
-            x += 100;
+            x += 50;
         }
+
+        //danger zones bepalen
+
 
 
     }
@@ -62,8 +48,12 @@ class Board{
         this.element.classList.add(`board${id}`);
         this.circles.forEach(circle => {
             circle.draw(container);
-
         });
+
+        // positie van het bord vaststellen
+        this.element.style.top = this.yBord + "px";
+        this.element.style.left = this.xBord + "px";
+        this.element.style.position = 'absolute';
     }
 
 
@@ -72,12 +62,13 @@ class Board{
         let currentX = piece.currentX + cirkelTarget.x + piece.initialLeft;
         let currentY = piece.currentY + cirkelTarget.y + piece.initialTop;
 
+        console.log("current x: " + currentX, "current y: " + currentY);
+
         let boardRect = this.element.getBoundingClientRect();
         let boardX = boardRect.left;
         let boardY = boardRect.top;
 
 
-        // nu zoeken naar het dichtbijzijnde cirkel
         let cirkel = null;
         for(let _cirkel of this.circles){
             let {element } = _cirkel;
@@ -85,7 +76,8 @@ class Board{
             let cirkelX = cirkelRect.left;
             let cirkelY = cirkelRect.top;
 
-            if(currentX > cirkelX && currentX < cirkelX + 100 && currentY > cirkelY && currentY < cirkelY + 100){
+
+            if(currentX >= cirkelX && currentX <= cirkelX + 50 && currentY >= cirkelY && currentY <= cirkelY + 50){
                 cirkel = _cirkel;
             }
 
@@ -97,43 +89,115 @@ class Board{
         }
 
 
+        let drawArray = [];
+        let nieuweBord;
+
         // het patroon plaatsen
-        console.log("patroon plaatsen");
-        console.log(`target cirkel: x${cirkel.x}, y${cirkel.y}`);
+        //console.log("patroon plaatsen");
+        //console.log(`target cirkel: x${cirkel.x}, y${cirkel.y}`);
 
-        //controleren of alle punten in het bord ligt
+
+        // door alle cirkels van het stukje lopen
         for(let i = 0 ; i < piece.circles.length ; i++){
-            let x = cirkel.x + piece.posities[i][0]*100;
-            let y = cirkel.y + piece.posities[i][1]*100;
-
-            if(x > 400 || x < 0 || y > 400 || y < 0){
-                console.log("Niet in het bord geplaatst");
-                return;
-            }
-
-        }
-
-
-
-        for(let i = 0 ; i < piece.circles.length ; i++){
-
-
 
             // circle = [0,0]
-            let x = cirkel.x + piece.posities[i][0]*100;
-            let y = cirkel.y + piece.posities[i][1]*100;
-            console.log(`${x}`, `${y}`);
+            let x = cirkel.x + piece.posities[i][0]*50;
+            let y = cirkel.y + piece.posities[i][1]*50;
+            console.log(x, y)
 
 
+            // eerst kijken of het stukje in het bord word geplaatst
 
-            for(let hallo of this.circles){
-                if(x === hallo.x && y === hallo.y){
-                    hallo.element.classList.add("taken");
-                    hallo.element.style.backgroundColor = piece.color;
+            if(x > 200 || x < 0 || y > 200 || y < 0){
+                console.log("een bollete ligt buiten het bord")
+            }
+            if(x < 0){
+                for(let i = 0 ; i < boardArray.length-1 ; i++){
+                    let bordX = boardArray[i].xBord;
+                    if(bordX < this.xBord && bordX >= this.xBord-200){
+                        console.log("een bolletje ligt links buiten het bord");
+                        nieuweBord = boardArray[i];
+                        // lopen door alle bolletjes van het bord
+                        nieuweBord.circles.forEach(circle => {
+                            if(circle.x === x + 200 && circle.y === y){
+                                circle.element.classList.add("taken");
+                                circle.element.style.backgroundColor = piece.color;
+                            }
+                        })
+                    }
+
+                }
+
+            } else if(x > 200){
+                for(let i = 0 ; i < boardArray.length ; i++){
+                    console.log("loopen om te kijken of het rechts ligt")
+                    let bordX = boardArray[i].xBord;
+                    console.log("bordX: " +bordX, "this.xbord: " +this.xBord);
+                    if(bordX > this.xBord && bordX <= this.xBord+200){
+                        console.log("een bolletje ligt rechts buiten het bord");
+                        nieuweBord = boardArray[i];
+                        // lopen door alle bolletjes van het bord
+                        nieuweBord.circles.forEach(circle => {
+                            if(circle.x === x - 200 && circle.y === y){
+                                circle.element.classList.add("taken");
+                                circle.element.style.backgroundColor = piece.color;
+                            }
+                        })
+                    }
+                }
+            } else if(y < 0 ){
+                for(let i = 0 ; i < boardArray.length ; i++){
+                    let bordY = boardArray[i].yBord;
+                    console.log("bordY: " +bordY, "this.ybord: " +this.yBord);
+                    if(bordY < this.yBord && bordY >= this.yBord-200){
+                        console.log("een bolletje ligt boven het bord");
+                        nieuweBord = boardArray[i];
+                        // lopen door alle bolletjes van het bord
+                        nieuweBord.circles.forEach(circle => {
+                            if(circle.x === x && circle.y === y + 200){
+                                circle.element.classList.add("taken");
+                                circle.element.style.backgroundColor = piece.color;
+                            }
+                        })
+                    }
+                }
+            } else if(y > this.yBord){
+                for(let i = 0 ; i < boardArray.length ; i++){
+                    let bordY = boardArray[i].yBord;
+                    console.log("bordY: " +bordY, "this.ybord: " +this.yBord);
+                    if(bordY > this.yBord && bordY <= this.yBord+200){
+                        console.log("een bolletje ligt onder het bord");
+                        nieuweBord = boardArray[i];
+                        // lopen door alle bolletjes van het bord
+                        nieuweBord.circles.forEach(circle => {
+                            if(circle.x === x&& circle.y === y -200){
+                                circle.element.classList.add("taken");
+                                circle.element.style.backgroundColor = piece.color;
+                            }
+                        })
+                    }
+                }
+            }
+
+
+            //kijken of er een cirkel op het bord dezelfde positie heeft dan de positie van de cirkle van het stukje
+            for(let i = 0 ; i < this.circles.length ; i++){
+                if(this.circles[i].x === x && this.circles[i].y === y){
+                    // kijken of er de cirkel al geen stukje staat
+                    if(this.circles[i].element.classList.contains("taken")){
+                        return;
+                    }
+                    drawArray.push(this.circles[i]);
                 }
             }
 
         }
+
+        // the drawarray tekenen
+        drawArray.forEach(circle =>{
+            circle.element.classList.add("taken");
+            circle.element.style.backgroundColor = piece.color;
+        })
 
         return true;
 

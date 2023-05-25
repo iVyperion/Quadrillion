@@ -1,7 +1,9 @@
+import boardArray from "./main.js";
 class Piece {
 
+
     constructor(circles, name, color, parent,posities) {
-        this.selected = null;
+        this._selected = null;
         this.name = name;
         this.posities = posities;
         this.parent = parent;
@@ -36,8 +38,21 @@ class Piece {
 
     }
 
+
+
+
     onMouseDown(circle, event){
-        this.selected = circle;
+
+        //this.posities.forEach(positie=>{
+            //console.log("voor x: " + positie[0], "voor y: " + positie[1]);
+        //})
+
+        this._selected = circle;
+
+        console.log("this.selected x: " + this._selected.x, "this.selected y: " + this._selected.y);
+        
+
+
         event.preventDefault();
         this.isDragging = true;
         // eerst kijken waar het stukje zich bevind
@@ -46,19 +61,22 @@ class Piece {
         this.initialLeft = this.element.offsetLeft;
         this.initialTop = this.element.offsetTop;
 
-// bepaal de index van het geselecteerde bolletje in de cirkel array
-        let indexCircle = this.circles.findIndex(circle => circle === this.selected);
+        // bepaal de index van het geselecteerde bolletje in de cirkel array
+        let indexCircle = this.circles.findIndex(circle => circle === this._selected);
 
-// haal de positie array op voor het geselecteerde bolletje
+        // haal de positie array op voor het geselecteerde bolletje
         let positieArray = this.posities[indexCircle];
 
-// haal de x- en y-coördinaten op uit de positie array
+        // haal de x- en y-coördinaten op uit de positie array
         let [x, y] = positieArray;
 
-// verplaats alle posities zodat het geselecteerde bolletje op positie (0, 0) staat
+        // verplaats alle posities zodat het geselecteerde bolletje op positie (0, 0) staat
         this.posities = this.posities.map(positie => [positie[0] - x, positie[1] - y]);
 
 
+        //this.posities.forEach(positie=>{
+            //console.log("na x: " + positie[0], "na y: " + positie[1]);
+        //})
     }
 
     onMouseMove(event){
@@ -70,12 +88,13 @@ class Piece {
             // waar is de nieuwe postie van het stukje
             const deltaX = event.clientX - this.startX;
             const deltaY = event.clientY - this.startY;
-            this.currentX =deltaX;
-            this.currentY =deltaY;
+            this.currentX = deltaX;
+            this.currentY = deltaY;
 
             // de nieuwe positie van het stukje zetten
             this.element.style.left = `${this.currentX}px`;
             this.element.style.top = `${this.currentY}px`;
+
 
         }
     }
@@ -84,28 +103,36 @@ class Piece {
     onMouseUp(event){
         event.preventDefault();
 
-
         if(this.isDragging){
-            let uitkomst = this.parent.drawPattern(this, this.selected);
+
+            let bordIndex;
+
+            // eerste kijken op welk bord we hem moeten plaatsen
+            for(let i = 0 ; i < boardArray.length ; i++){
+                let x = boardArray[i].element.getBoundingClientRect().left;
+                let y = boardArray[i].element.getBoundingClientRect().top;
+
+                if(event.clientX > x && event.clientX < x + boardArray[i].width && event.clientY > y && event.clientY < y + boardArray[i].height){
+                    bordIndex = i;
+                }
+
+            }
+
+
+            let uitkomst = boardArray[bordIndex].drawPattern(this, this._selected);
             if(uitkomst){
                 this.element.remove();
             } else {
-                this.element.style.left = this.initialLeft + "px";
-                this.element.style.top = this.initialTop + "px";
-
+                this.element.style.left = 0 +"px";
+                this.element.style.top = 0 + 'px';
             }
         }
 
         this.isDragging = false;
 
 
-        if(this.parent.checkGame()){
-            console.log("u hebt gewonnen");
-        }
-
 
     }
-
 
 
 }
