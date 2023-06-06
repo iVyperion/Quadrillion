@@ -1,17 +1,33 @@
 
-/* GAME */
-
-.gameboard{
-    width: 400px;
-    height: 400px;
-    background-color: #d8d7d7;
-    position: relative;
-
+html{
+    background-color: #272727;
 }
 
+body{
+    margin: 0 auto;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.allTheBoards{
+    width: 800px;
+    height: 400px;
+    position: relative;
+}
+
+
+
+/* opmaak van de cirkel*/
 .circle{
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     position: absolute;
     background-color: rgba(255, 255, 255, 0.9);
     transform: translate(-50%, -50%);
@@ -23,21 +39,32 @@
 .options-container{
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    width: 600px;
-    height : 700px;
+    gap: 3rem;
+    width: 60rem;
+    margin: 0 auto;
+    height: 30rem;
 }
 
+/* klasse voor het stukje */
 
 .piece{
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
 }
 
 
-.board1{
+
+/* klasse voor bordje nummer1 */
+
+
+.boardStyle{
+    width: 200px;
+    height: 200px;
+    background-color: #d8d7d7;
     border-radius: 15px;
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
+
+/* klasse waneer stukje het bord bezet */

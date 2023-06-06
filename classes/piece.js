@@ -105,7 +105,9 @@ class Piece {
 
         if(this.isDragging){
 
-            let bordIndex;
+            let uitHetBord = false;
+
+            let bordIndex = -1;
 
             // eerste kijken op welk bord we hem moeten plaatsen
             for(let i = 0 ; i < boardArray.length ; i++){
@@ -114,24 +116,43 @@ class Piece {
 
                 if(event.clientX > x && event.clientX < x + boardArray[i].width && event.clientY > y && event.clientY < y + boardArray[i].height){
                     bordIndex = i;
+                    uitHetBord = true;
                 }
 
             }
-
-
-            let uitkomst = boardArray[bordIndex].drawPattern(this, this._selected);
-            if(uitkomst){
-                this.element.remove();
+            if(uitHetBord) {
+                let uitkomst = boardArray[bordIndex].drawPattern(this, this._selected);
+                console.log(uitkomst);
+                if(uitkomst){
+                    this.element.remove();
+                } else {
+                    console.log('Stukje word terug gezet naar de vorige postitie')
+                    this.element.style.left = 0 +"px";
+                    this.element.style.top = 0 + 'px';
+                }
             } else {
+                console.log('Stukje word terug gezet naar de vorige postitie')
                 this.element.style.left = 0 +"px";
                 this.element.style.top = 0 + 'px';
             }
+
         }
 
         this.isDragging = false;
 
+        let didYouWIn = true;
 
+        boardArray.forEach(board => {
+            board.circles.forEach( circle => {
+                if(!circle.element.classList.contains('taken')) {
+                    didYouWIn = false;
+                }
+            })
+        })
 
+        if(didYouWIn) {
+            window.alert('You won! Congrats');
+        }
     }
 
 

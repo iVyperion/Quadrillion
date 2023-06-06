@@ -29,7 +29,7 @@ class Board{
 
             this.positieDanger.forEach(danger=>{
                 if(circle.x === danger[0]*50 +25 && circle.y === danger[1]*50+25){
-                    circle.element.classList.contains('taken');
+                    circle.element.classList.add('taken');
                     circle.element.style.backgroundColor  = 'black';
                 }
             })
@@ -85,12 +85,14 @@ class Board{
 
 
         if(!cirkel){
-            return;
+             return false;
         }
 
 
-        let drawArray = [];
+        let drawArray = []
+        let buitenBord = [];
         let nieuweBord;
+        let testBuitenBord = false;
 
         // het patroon plaatsen
         //console.log("patroon plaatsen");
@@ -100,10 +102,11 @@ class Board{
         // door alle cirkels van het stukje lopen
         for(let i = 0 ; i < piece.circles.length ; i++){
 
+
             // circle = [0,0]
             let x = cirkel.x + piece.posities[i][0]*50;
             let y = cirkel.y + piece.posities[i][1]*50;
-            console.log(x, y)
+            console.log(x, y);
 
 
             // eerst kijken of het stukje in het bord word geplaatst
@@ -117,11 +120,19 @@ class Board{
                     if(bordX < this.xBord && bordX >= this.xBord-200){
                         console.log("een bolletje ligt links buiten het bord");
                         nieuweBord = boardArray[i];
+
+
                         // lopen door alle bolletjes van het bord
                         nieuweBord.circles.forEach(circle => {
                             if(circle.x === x + 200 && circle.y === y){
-                                circle.element.classList.add("taken");
-                                circle.element.style.backgroundColor = piece.color;
+
+                                if(circle.element.classList.contains('taken')) {
+                                    testBuitenBord = true;
+                                } else {
+                                    circle.element.classList.add("taken");
+                                    circle.element.style.backgroundColor = piece.color;
+                                    buitenBord.push([circle, nieuweBord]);
+                                }
                             }
                         })
                     }
@@ -136,11 +147,19 @@ class Board{
                     if(bordX > this.xBord && bordX <= this.xBord+200){
                         console.log("een bolletje ligt rechts buiten het bord");
                         nieuweBord = boardArray[i];
+
+
                         // lopen door alle bolletjes van het bord
                         nieuweBord.circles.forEach(circle => {
                             if(circle.x === x - 200 && circle.y === y){
-                                circle.element.classList.add("taken");
-                                circle.element.style.backgroundColor = piece.color;
+
+                                if(circle.element.classList.contains('taken')) {
+                                    testBuitenBord = true;
+                                } else {
+                                    circle.element.classList.add("taken");
+                                    circle.element.style.backgroundColor = piece.color;
+                                    buitenBord.push([circle, nieuweBord]);
+                                }
                             }
                         })
                     }
@@ -152,11 +171,18 @@ class Board{
                     if(bordY < this.yBord && bordY >= this.yBord-200){
                         console.log("een bolletje ligt boven het bord");
                         nieuweBord = boardArray[i];
+
                         // lopen door alle bolletjes van het bord
                         nieuweBord.circles.forEach(circle => {
                             if(circle.x === x && circle.y === y + 200){
-                                circle.element.classList.add("taken");
-                                circle.element.style.backgroundColor = piece.color;
+
+                                if(circle.element.classList.contains('taken')) {
+                                    testBuitenBord = true;
+                                } else {
+                                    circle.element.classList.add("taken");
+                                    circle.element.style.backgroundColor = piece.color;
+                                    buitenBord.push([circle, nieuweBord]);
+                                }
                             }
                         })
                     }
@@ -168,24 +194,50 @@ class Board{
                     if(bordY > this.yBord && bordY <= this.yBord+200){
                         console.log("een bolletje ligt onder het bord");
                         nieuweBord = boardArray[i];
+
+
+
                         // lopen door alle bolletjes van het bord
                         nieuweBord.circles.forEach(circle => {
-                            if(circle.x === x&& circle.y === y -200){
-                                circle.element.classList.add("taken");
-                                circle.element.style.backgroundColor = piece.color;
+                            if(circle.x === x && circle.y === y - 200){
+
+                                if(circle.element.classList.contains('taken')) {
+                                    testBuitenBord = true;
+                                } else {
+                                    circle.element.classList.add("taken");
+                                    circle.element.style.backgroundColor = piece.color;
+                                    buitenBord.push([circle, nieuweBord]);
+                                }
                             }
                         })
                     }
                 }
             }
 
+            if(testBuitenBord) {
+                drawArray.forEach(circle =>{
+                    //eerste controleren of de bolletjes al bezet zijn door een ander stukje
+                    circle.element.classList.remove("taken");
+                    circle.element.style.backgroundColor = 'white';
+                })
 
-            //kijken of er een cirkel op het bord dezelfde positie heeft dan de positie van de cirkle van het stukje
+                buitenBord.forEach(object => {
+                    object[0].element.classList.remove('taken');
+                    object[0].element.style.backgroundColor = 'white';
+                })
+
+                return false;
+            }
+
+
+
+            //kijken of er een cirkel op het bord dezelfde positie heeft dan de positie van de cirkle van het stukje => misschien hier een functie van maken om overal te kunnen gebruiken
             for(let i = 0 ; i < this.circles.length ; i++){
                 if(this.circles[i].x === x && this.circles[i].y === y){
                     // kijken of er de cirkel al geen stukje staat
                     if(this.circles[i].element.classList.contains("taken")){
-                        return;
+                        // de stukjes waar op het volgende bord worden niet gechecked
+                        return false;
                     }
                     drawArray.push(this.circles[i]);
                 }
@@ -193,27 +245,15 @@ class Board{
 
         }
 
+        console.log(drawArray)
         // the drawarray tekenen
         drawArray.forEach(circle =>{
+            //eerste controleren of de bolletjes al bezet zijn door een ander stukje
             circle.element.classList.add("taken");
             circle.element.style.backgroundColor = piece.color;
         })
 
         return true;
-
-    }
-
-    checkGame() {
-
-        let didYouWin = true;
-
-        this.circles.forEach(circle => {
-            if(!(circle.element.classList.contains('taken') || circle.element.classList.contains('danger') )){
-                didYouWin = false;
-            }
-        })
-
-        return didYouWin;
 
     }
 
