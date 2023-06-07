@@ -47,15 +47,20 @@ header p {
 }
 
 nav ul {
-    display: none;
+    display: block;
 }
 
 .hamburger {
     margin: 0 .5rem;
+    cursor: pointer;
 }
 
 nav {
     margin: 0 2.5rem;
+}
+
+.navbar {
+    display: flex;
 }
 
 .bar {
@@ -84,6 +89,47 @@ nav {
 }
 
 /* BREAKPOINTS */
+@media (max-width:768px){
+    
+    main {
+        margin-top: 10rem;
+    }
+
+    .hamburger {
+        display: block;
+    }
+    .hamburger.active .bar:nth-child(2){
+        opacity:0;
+    }
+    .hamburger.active .bar:nth-child(1){
+        transform:translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .navmenu {
+        position: absolute;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: var(--secondary);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+    .navitem {
+        margin: 16px 0;
+    }
+    .navmenu.active {
+        left: 0;
+    }
+    nav a {
+        text-decoration: none;
+        color: var(--primary);
+    }
+}
 @media (min-width: 768px) {
     .mobile-disapear {
         display: block;
