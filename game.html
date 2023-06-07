@@ -20,12 +20,12 @@
     <header>
         <img src="logo.png" alt="Quadrillion Logo">
         <p>uadrillion</p>
-        <nav>
-            <ul>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+        <nav class="navbar">
+            <ul class="navmenu">
+                <li class="navitem"><a href="./index.html" class="navlink">Home</a></li>
+                <li class="navitem"><a href="#" class="navlink">Play</a></li>
+                <li class="navitem"><a href="./game.html" class="navlink">Levels</a></li>
+                <li class="navitem"><a href="./score.html" class="navlink">Score</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -42,19 +42,32 @@
                 <div class="gameboard3 boardStyle"></div>
                 <div class="gameboard4 boardStyle"></div>
             </div>
-        
-        
-        
+
+
+
         </div>
-        
+
         <div class="options-container">
         </div>
-        
+
         <div class="buttons">
             <button id="rotate">Rotate</button>
             <button id="rotate2">Rotate2</button>
         </div>
     </main>
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".navmenu");
+        const main = document.querySelector("main");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+            main.classList.toggle("top-20");
+        }
+        )
+
+    </script>
 </body>
 
 </html>

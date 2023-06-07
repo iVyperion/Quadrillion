@@ -19,8 +19,10 @@
     font-size: 2.5rem;
 }
 
-.level a {
+.level button {
     position: absolute;
+    background-color: transparent;
+    border: none;
     top: 0;
     left: 0;
     width: 100%;
@@ -41,5 +43,89 @@
     .levels {
         display: grid;
         margin: 5rem;
+        grid-template-rows: auto;
+        grid-template-columns: auto;
+        width: min-content;
     }
+    .level:nth-child(1) {
+        grid-row: 1 / 1;
+        grid-column: 1 / 1;
+    }
+    .level:nth-child(2) {
+        grid-row: 1 / 1;
+        grid-column: 2 / 2;
+    }
+    .level:nth-child(3) {
+        grid-row: 1 / 1;
+        grid-column: 3 / 3;
+    }
+    .level:nth-child(4) {
+        grid-row: 1 / 1;
+        grid-column: 4 / 4;
+    }
+    .level:nth-child(5) {
+        grid-row: 1 / 1;
+        grid-column: 5 / 5;
+    }
+    .level:nth-child(6) {
+        grid-row: 2 / 2;
+        grid-column: 5 / 5;
+    }
+    .level:nth-child(7) {
+        grid-row: 3 / 3;
+        grid-column: 5 / 5;
+    }
+    .level:nth-child(8){
+        grid-row: 3 / 3;
+        grid-column: 4 / 4;
+    }
+    .level:nth-child(9){
+        grid-row: 3 / 3;
+        grid-column: 3 / 3;
+    }
+    .level:nth-child(10){
+        grid-row: 3 / 3;
+        grid-column: 2 / 2;
+    }
+    .level:nth-child(11){
+        grid-row: 3 / 3;
+        grid-column: 1 / 1;
+    }
+    .level:nth-child(12){
+        grid-row: 4 / 4;
+        grid-column: 1 / 1;
+    }
+    .level:nth-child(13){
+        grid-row: 5 / 5;
+        grid-column: 1 / 1;
+    }
+    .level:nth-child(14){
+        grid-row: 5 / 5;
+        grid-column: 2 / 2;
+    }
+    .level:nth-child(15){
+        grid-row: 5 / 5;
+        grid-column: 3 / 3;
+    }
+    .level:nth-child(16){
+        grid-row: 5 / 5;
+        grid-column: 4 / 4;
+    }
+    .level:nth-child(17){
+        grid-row: 5 / 5;
+        grid-column: 5 / 5;
+    }
+    .level:nth-child(18){
+        grid-row: 6 / 6;
+        grid-column: 5 / 5;
+    }
+    .level:nth-child(19){
+        grid-row: 7 / 7;
+        grid-column: 5 / 5;
+    }
+    .level:nth-child(20){
+        grid-row: 7 / 7;
+        grid-column: 4 / 4;
+    }
+    
 }

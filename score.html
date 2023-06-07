@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="classes/mainScores.js" type="module"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/score.css">
@@ -21,12 +22,12 @@
             <img src="logo.png" alt="Quadrillion Logo">
             <p class="mobile-disapear">uadrillion</p>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="game.html">Play</a></li>
-                <li><a href="levels.html">Levels</a></li>
-                <li><a href="#">Score</a></li>
+        <nav class="navbar">
+            <ul class="navmenu">
+                <li class="navitem"><a href="./index.html" class="navlink">Home</a></li>
+                <li class="navitem"><a href="./game.html" class="navlink">Play</a></li>
+                <li class="navitem"><a href="./levels.html" class="navlink">Levels</a></li>
+                <li class="navitem"><a href="#" class="navlink">Score</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -37,6 +38,7 @@
     </header>
     <main>
         <div class="tables">
+            <h1>Your scores</h1>
             <section class="score">
                 <table>
                     <thead>
@@ -46,7 +48,7 @@
                             <th>Time</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="your_scores">
                         <tr>
                             <td>#3</td>
                             <td>John Doe</td>
@@ -65,6 +67,7 @@
                     </tbody>
                 </table>
             </section>
+            <h1>Top scores</h1>
             <section class="score top_players">
                 <table>
                     <thead>
@@ -74,9 +77,12 @@
                             <th>Time</th>
                         </tr>
                     </thead>
+                    <tbody id="top_players">
 
+                    </tbody>
                 </table>
             </section>
+            <h1>Recent scores</h1>
             <section class="score">
                 <table>
                     <thead>
@@ -86,11 +92,24 @@
                             <th>Time</th>
                         </tr>
                     </thead>
+                    <tbody id="recent_scores">
 
+                    </tbody>
                 </table>
             </section>
         </div>
     </main>
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+       const navMenu = document.querySelector(".navmenu");
+
+       hamburger.addEventListener("click", () =>{
+       hamburger.classList.toggle("active");
+       navMenu.classList.toggle("active");
+   }
+   )
+
+   </script>
 </body>
 
 </html>

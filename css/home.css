@@ -1,5 +1,7 @@
-.intro {
-
+main {
+    height: 92.5dvh;
+    display: flex;
+    align-items: center;
 }
 
 .home_box {

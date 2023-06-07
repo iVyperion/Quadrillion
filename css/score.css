@@ -32,3 +32,9 @@ th, td {
     padding: .5rem;
     min-width: fit-content;
 }
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--text);
+}
