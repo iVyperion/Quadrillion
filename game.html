@@ -42,14 +42,14 @@
                 <div class="gameboard3 boardStyle"></div>
                 <div class="gameboard4 boardStyle"></div>
             </div>
-        
-        
-        
+
+
+
         </div>
-        
+
         <div class="options-container">
         </div>
-        
+
         <div class="buttons">
             <button id="rotate">Rotate</button>
             <button id="rotate2">Rotate2</button>
@@ -57,15 +57,17 @@
     </main>
     <script>
         const hamburger = document.querySelector(".hamburger");
-       const navMenu = document.querySelector(".navmenu");
+        const navMenu = document.querySelector(".navmenu");
+        const main = document.querySelector("main");
 
-       hamburger.addEventListener("click", () =>{
-       hamburger.classList.toggle("active");
-       navMenu.classList.toggle("active");
-   }
-   )
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+            main.classList.toggle("top-20");
+        }
+        )
 
-   </script>
+    </script>
 </body>
 
 </html>
