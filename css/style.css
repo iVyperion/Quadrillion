@@ -117,5 +117,34 @@ nav {
         display: none;
     }
 }
+/*footer*/
+footer{
+    background-color: var(--secondary);
+    min-height: 5rem;
+    height: 7.5dvh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer-txt{
+    color: var(--primary);
+    display: flex;
+    justify-content: center;
+    
+}
+.footer-logo{
+    width: 50px;
+    display: flex;
+}
+.footer-logo p{
+    color: var(--primary);
+    align-items: center;
+    display: flex;
+}
+
+
+
+
 
 /* ANIMATIONS */
