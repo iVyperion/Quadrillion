@@ -135,6 +135,8 @@ class Board{
                                 }
                             }
                         })
+                    } else {
+                        return false;
                     }
 
                 }
@@ -162,6 +164,8 @@ class Board{
                                 }
                             }
                         })
+                    } else {
+                        return false;
                     }
                 }
             } else if(y < 0 ){
@@ -185,6 +189,8 @@ class Board{
                                 }
                             }
                         })
+                    } else {
+                        return false;
                     }
                 }
             } else if(y > this.yBord){
@@ -210,6 +216,8 @@ class Board{
                                 }
                             }
                         })
+                    } else {
+                        return false;
                     }
                 }
             }
