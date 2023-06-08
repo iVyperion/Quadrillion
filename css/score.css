@@ -38,3 +38,11 @@ h1 {
     font-size: 3rem;
     color: var(--text);
 }
+
+.empty-row {
+    color: var(--error);
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 1.25rem;
+}
+

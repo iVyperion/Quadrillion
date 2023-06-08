@@ -68,3 +68,15 @@ body{
 
 
 /* klasse waneer stukje het bord bezet */
+
+/*@media (max-width: 768px) {
+    .boardStyle {
+        width: 150px;
+        height: 150px;
+    }
+
+    .circle{
+        width: 25px;
+        height: 25px;
+    }
+}*/

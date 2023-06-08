@@ -1,5 +1,5 @@
 main {
-    height: 92.5dvh;
+    min-height: 80dvh;
     display: flex;
     align-items: center;
 }
@@ -14,7 +14,7 @@ main {
 }
 
 .home_box > img {
-    border-radius: 50px 0px;
+    border-radius: 50px 0px 0px 0px;
     height: fit-content;
 }
 
@@ -42,8 +42,8 @@ main {
         margin: 0 5rem;
     }
     .home_box > img {
-        height: 100%;
-        max-width: 50%;
+        height: auto;
+        max-width: 45%;
         object-fit: cover;
     }
     .home_box > div {
