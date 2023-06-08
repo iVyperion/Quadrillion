@@ -14,7 +14,7 @@ main {
 }
 
 .home_box > img {
-    border-radius: 50px 0px;
+    border-radius: 50px 0px 0px 0px;
     height: fit-content;
 }
 
