@@ -114,11 +114,12 @@ footer{
 }
 .footer-links > ul {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 3rem;
 }
 
 .footer-links a {
-    text-decoration: underline;
+    text-decoration: none;
     color: var(--primary);
 }
 
