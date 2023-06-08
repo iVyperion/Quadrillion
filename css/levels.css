@@ -38,6 +38,11 @@
 .incomplete {
     background-color: var(--tertairy);
 }
+@media (max-width:768px) {
+    main {
+        margin-top: 10rem;
+    }
+}
 
 @media (min-width: 768px) {
     .levels {

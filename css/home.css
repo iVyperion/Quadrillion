@@ -42,9 +42,9 @@ main {
         margin: 0 5rem;
     }
     .home_box > img {
-        height: 100%;
-        max-width: 50%;
-        object-fit: cover;
+        height: auto;
+        max-width: 45%;
+        object-fit: fill;
     }
     .home_box > div {
         display: flex;

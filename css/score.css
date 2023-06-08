@@ -38,3 +38,9 @@ h1 {
     font-size: 3rem;
     color: var(--text);
 }
+
+@media (max-width:768px) {
+    main {
+        margin-top: 10rem;
+    }
+}

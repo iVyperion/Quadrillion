@@ -38,84 +38,84 @@
     </header>
     <main>
         <section class="levels">
-            <div class="level incomplete">
+            <div id="level1" class="level incomplete">
                 <p>1</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level2"  class="level incomplete">
                 <p>2</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level3"  class="level incomplete">
                 <p>3</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level4"  class="level incomplete">
                 <p>4</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level5"  class="level incomplete">
                 <p>5</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level6"  class="level incomplete">
                 <p>6</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level7"  class="level incomplete">
                 <p>7</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level8"  class="level incomplete">
                 <p>8</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level9"  class="level incomplete">
                 <p>9</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level10"  class="level incomplete">
                 <p>10</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level11"  class="level incomplete">
                 <p>11</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level12" class="level incomplete">
                 <p>12</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level13"  class="level incomplete">
                 <p>13</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level14"  class="level incomplete">
                 <p>14</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level15"  class="level incomplete">
                 <p>15</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level16"  class="level incomplete">
                 <p>16</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level17"  class="level incomplete">
                 <p>17</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level18"  class="level incomplete">
                 <p>18</p>
                 <button></button>
             </div>
-            <div class="level incomplete">
+            <div id="level19"  class="level incomplete">
                 <p>19</p>
                 <button></button>
             </div>
             
-            <div class="level incomplete">
+            <div id="level20"  class="level incomplete">
                 <p>20</p>
                 <button></button>
             </div>
@@ -139,14 +139,22 @@
         </div>
     </footer>
     <script>
-        const hamburger = document.querySelector(".hamburger");
-       const navMenu = document.querySelector(".navmenu");
 
-       hamburger.addEventListener("click", () =>{
-       hamburger.classList.toggle("active");
-       navMenu.classList.toggle("active");
-   }
-   )
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".navmenu");
+
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  navMenu.classList.toggle("active");
+});
+
+const levelZoeker = document.querySelectorAll('.level');
+levelZoeker.forEach((level) => {
+  level.addEventListener('click', () => {
+    const levelId = level.id;
+    window.location.href = `game.html?level=${levelId}`;
+  });
+});
 
    </script>
 </body>
