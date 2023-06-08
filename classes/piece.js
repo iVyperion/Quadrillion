@@ -44,13 +44,13 @@ class Piece {
     onMouseDown(circle, event){
 
         //this.posities.forEach(positie=>{
-            //console.log("voor x: " + positie[0], "voor y: " + positie[1]);
+        //console.log("voor x: " + positie[0], "voor y: " + positie[1]);
         //})
 
         this._selected = circle;
 
         console.log("this.selected x: " + this._selected.x, "this.selected y: " + this._selected.y);
-        
+
 
 
         event.preventDefault();
@@ -75,7 +75,7 @@ class Piece {
 
 
         //this.posities.forEach(positie=>{
-            //console.log("na x: " + positie[0], "na y: " + positie[1]);
+        //console.log("na x: " + positie[0], "na y: " + positie[1]);
         //})
     }
 

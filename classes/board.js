@@ -85,15 +85,15 @@ class Board{
 
 
         if(!cirkel){
-             return false;
+            return false;
         }
 
 
         let drawArray = []
         let buitenBord = [];
-        let nieuweBord = null;
+        let nieuweBord;
         let testBuitenBord = false;
-        let erZijnBolletjes = false;
+        let utiBord = true;
 
         // het patroon plaatsen
         //console.log("patroon plaatsen");
@@ -111,42 +111,47 @@ class Board{
 
 
             // eerst kijken of het stukje in het bord word geplaatst
-  
+            console.log(x);
+            if(x > 200 || x < 0 || y > 200 || y < 0){
+                console.log("een bollete ligt buiten het bord")
+            }
             if(x < 0){
-                for(let i = 0 ; i < boardArray.length ; i++){
+                for(let i = 0 ; i < boardArray.length-1 ; i++){
                     let bordX = boardArray[i].xBord;
-                    console.log('Bordx : ' + bordX, 'bord momenteel : ' + this.xBord);
-                    if(bordX < this.xBord && bordX === this.xBord-200){
-                        erZijnBolletjes = true;
+                    if(bordX < this.xBord && bordX >= this.xBord-200){
                         console.log("een bolletje ligt links buiten het bord");
                         nieuweBord = boardArray[i];
 
 
+
                         // lopen door alle bolletjes van het bord
                         nieuweBord.circles.forEach(circle => {
+
+
+
                             if(circle.x === x + 200 && circle.y === y){
-
-
+                                utiBord = false;
                                 if(circle.element.classList.contains('taken')) {
+
                                     testBuitenBord = true;
                                 } else {
                                     circle.element.classList.add("taken");
                                     circle.element.style.backgroundColor = piece.color;
                                     buitenBord.push([circle, nieuweBord]);
                                 }
+
+
                             }
                         })
-
-    
-
                     }
 
                 }
 
-                if(!erZijnBolletjes) {
+
+                if(utiBord) {
+                    console.log('bolletje ligt buiten');
                     return false;
                 }
-
 
             } else if(x > 200){
                 for(let i = 0 ; i < boardArray.length ; i++){
@@ -154,15 +159,13 @@ class Board{
                     let bordX = boardArray[i].xBord;
                     console.log("bordX: " +bordX, "this.xbord: " +this.xBord);
                     if(bordX > this.xBord && bordX <= this.xBord+200){
-                        erZijnBolletjes = true;
                         console.log("een bolletje ligt rechts buiten het bord");
                         nieuweBord = boardArray[i];
-
 
                         // lopen door alle bolletjes van het bord
                         nieuweBord.circles.forEach(circle => {
                             if(circle.x === x - 200 && circle.y === y){
-
+                                utiBord = false;
                                 if(circle.element.classList.contains('taken')) {
                                     testBuitenBord = true;
                                 } else {
@@ -170,33 +173,30 @@ class Board{
                                     circle.element.style.backgroundColor = piece.color;
                                     buitenBord.push([circle, nieuweBord]);
                                 }
+
                             }
                         })
                     }
                 }
 
-
-                
-                if(!erZijnBolletjes) {
+                if(utiBord) {
+                    console.log('bolletje ligt buiten');
                     return false;
                 }
-
-
-
 
             } else if(y < 0 ){
                 for(let i = 0 ; i < boardArray.length ; i++){
                     let bordY = boardArray[i].yBord;
                     console.log("bordY: " +bordY, "this.ybord: " +this.yBord);
                     if(bordY < this.yBord && bordY >= this.yBord-200){
-                        erZijnBolletjes = true;
                         console.log("een bolletje ligt boven het bord");
                         nieuweBord = boardArray[i];
-
                         // lopen door alle bolletjes van het bord
                         nieuweBord.circles.forEach(circle => {
-                            if(circle.x === x && circle.y === y + 200){
 
+
+                            if(circle.x === x && circle.y === y + 200){
+                                utiBord = false;
                                 if(circle.element.classList.contains('taken')) {
                                     testBuitenBord = true;
                                 } else {
@@ -204,34 +204,31 @@ class Board{
                                     circle.element.style.backgroundColor = piece.color;
                                     buitenBord.push([circle, nieuweBord]);
                                 }
+
+
                             }
                         })
                     }
                 }
 
-
-                
-                if(!erZijnBolletjes) {
+                if(utiBord) {
+                    console.log('bolletje ligt buiten');
                     return false;
                 }
 
-
-
-            } else if(y > this.yBord){
+            } else if(y > 200){
                 for(let i = 0 ; i < boardArray.length ; i++){
                     let bordY = boardArray[i].yBord;
                     console.log("bordY: " +bordY, "this.ybord: " +this.yBord);
                     if(bordY > this.yBord && bordY <= this.yBord+200){
-                        erZijnBolletjes = true;
                         console.log("een bolletje ligt onder het bord");
                         nieuweBord = boardArray[i];
-
 
 
                         // lopen door alle bolletjes van het bord
                         nieuweBord.circles.forEach(circle => {
                             if(circle.x === x && circle.y === y - 200){
-
+                                utiBord = false;
                                 if(circle.element.classList.contains('taken')) {
                                     testBuitenBord = true;
                                 } else {
@@ -239,24 +236,18 @@ class Board{
                                     circle.element.style.backgroundColor = piece.color;
                                     buitenBord.push([circle, nieuweBord]);
                                 }
+
+
                             }
                         })
                     }
-
-
                 }
 
-
-                
-                if(!erZijnBolletjes) {
+                if(utiBord) {
+                    console.log('bolletje ligt buiten');
                     return false;
                 }
-
-
-
-
             }
-        
 
             if(testBuitenBord) {
                 drawArray.forEach(circle =>{
@@ -283,8 +274,6 @@ class Board{
                         // de stukjes waar op het volgende bord worden niet gechecked
                         return false;
                     }
-
-
                     drawArray.push(this.circles[i]);
                 }
             }
