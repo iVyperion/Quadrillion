@@ -39,6 +39,29 @@
     background-color: var(--tertairy);
 }
 
+.easy {
+    background-color: seagreen;
+}
+
+ .normal {
+    background-color: goldenrod;
+}
+
+
+.hard {
+    background-color: brown;
+}
+
+.expert {
+    background-color: purple;
+}
+
+
+.wizard {
+    background-color:darkblue;
+}
+
+
 @media (min-width: 768px) {
     .levels {
         display: grid;
