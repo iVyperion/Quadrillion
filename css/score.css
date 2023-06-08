@@ -39,8 +39,10 @@ h1 {
     color: var(--text);
 }
 
-@media (max-width:768px) {
-    main {
-        margin-top: 10rem;
-    }
+.empty-row {
+    color: var(--error);
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 1.25rem;
 }
+

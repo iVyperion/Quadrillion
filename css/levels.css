@@ -38,16 +38,11 @@
 .incomplete {
     background-color: var(--tertairy);
 }
-@media (max-width:768px) {
-    main {
-        margin-top: 10rem;
-    }
-}
 
 @media (min-width: 768px) {
     .levels {
         display: grid;
-        margin: 5rem;
+        margin: 5rem auto;
         grid-template-rows: auto;
         grid-template-columns: auto;
         width: min-content;

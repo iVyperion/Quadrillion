@@ -1,5 +1,5 @@
 main {
-    height: 92.5dvh;
+    min-height: 80dvh;
     display: flex;
     align-items: center;
 }
@@ -44,7 +44,7 @@ main {
     .home_box > img {
         height: auto;
         max-width: 45%;
-        object-fit: fill;
+        object-fit: cover;
     }
     .home_box > div {
         display: flex;
