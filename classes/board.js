@@ -3,25 +3,20 @@ import boardArray from "./main.js";
 
 let id = 0;
 
-class Board {
+class Board{
     constructor(board, xBord, yBord, positieDanger) {
         this.positieDanger = positieDanger;
         this.element = board;
         this.circles = [];
-        if (window.innerWidth > 600) {
-            this.width = 100;
-            this.height = 100;
-        } else {
-            this.width = 300;
-            this.height = 300;
-        }
+        this.width =300;
+        this.height = 300;
         this.xBord = xBord;
         this.yBord = yBord;
         let x = 25;
         let y = 25;
-        for (let i = 0; i < 16; i++) {
+        for(let i = 0 ; i < 16 ; i++){
             // controleren of er een nieuwe lijn moet gestart worden
-            if (i === 4 || i === 8 || i === 12) {
+            if(i === 4 || i === 8 || i === 12){
                 x = 25;
                 y += 50;
             }
@@ -32,10 +27,10 @@ class Board {
             id++;
             this.circles.push(circle);
 
-            this.positieDanger.forEach(danger => {
-                if (circle.x === danger[0] * 50 + 25 && circle.y === danger[1] * 50 + 25) {
+            this.positieDanger.forEach(danger=>{
+                if(circle.x === danger[0]*50 +25 && circle.y === danger[1]*50+25){
                     circle.element.classList.add('taken');
-                    circle.element.style.backgroundColor = 'black';
+                    circle.element.style.backgroundColor  = 'black';
                 }
             })
 
@@ -49,7 +44,7 @@ class Board {
 
     }
 
-    drawBoard(container, id) {
+    drawBoard (container, id){
         this.element.classList.add(`board${id}`);
         this.circles.forEach(circle => {
             circle.draw(container);
@@ -62,7 +57,7 @@ class Board {
     }
 
 
-    drawPattern(piece, cirkelTarget) {
+    drawPattern(piece , cirkelTarget){
         //positie bepalen van het stukje
         let currentX = piece.currentX + cirkelTarget.x + piece.initialLeft;
         let currentY = piece.currentY + cirkelTarget.y + piece.initialTop;
@@ -75,21 +70,21 @@ class Board {
 
 
         let cirkel = null;
-        for (let _cirkel of this.circles) {
-            let { element } = _cirkel;
+        for(let _cirkel of this.circles){
+            let {element } = _cirkel;
             let cirkelRect = element.getBoundingClientRect();
             let cirkelX = cirkelRect.left;
             let cirkelY = cirkelRect.top;
 
 
-            if (currentX >= cirkelX && currentX <= cirkelX + 50 && currentY >= cirkelY && currentY <= cirkelY + 50) {
+            if(currentX >= cirkelX && currentX <= cirkelX + 50 && currentY >= cirkelY && currentY <= cirkelY + 50){
                 cirkel = _cirkel;
             }
 
         }
 
 
-        if (!cirkel) {
+        if(!cirkel){
             return false;
         }
 
@@ -106,12 +101,12 @@ class Board {
 
 
         // door alle cirkels van het stukje lopen
-        for (let i = 0; i < piece.circles.length; i++) {
+        for(let i = 0 ; i < piece.circles.length ; i++){
 
 
             // circle = [0,0]
-            let x = cirkel.x + piece.posities[i][0] * 50;
-            let y = cirkel.y + piece.posities[i][1] * 50;
+            let x = cirkel.x + piece.posities[i][0]*50;
+            let y = cirkel.y + piece.posities[i][1]*50;
             console.log(x, y);
 
 
@@ -254,9 +249,8 @@ class Board {
                 }
             }
 
-
-            if (testBuitenBord) {
-                drawArray.forEach(circle => {
+            if(testBuitenBord) {
+                drawArray.forEach(circle =>{
                     //eerste controleren of de bolletjes al bezet zijn door een ander stukje
                     circle.element.classList.remove("taken");
                     circle.element.style.backgroundColor = 'white';
@@ -273,10 +267,10 @@ class Board {
 
 
             //kijken of er een cirkel op het bord dezelfde positie heeft dan de positie van de cirkle van het stukje => misschien hier een functie van maken om overal te kunnen gebruiken
-            for (let i = 0; i < this.circles.length; i++) {
-                if (this.circles[i].x === x && this.circles[i].y === y) {
+            for(let i = 0 ; i < this.circles.length ; i++){
+                if(this.circles[i].x === x && this.circles[i].y === y){
                     // kijken of er de cirkel al geen stukje staat
-                    if (this.circles[i].element.classList.contains("taken")) {
+                    if(this.circles[i].element.classList.contains("taken")){
                         // de stukjes waar op het volgende bord worden niet gechecked
                         return false;
                     }
@@ -288,7 +282,7 @@ class Board {
 
         console.log(drawArray)
         // the drawarray tekenen
-        drawArray.forEach(circle => {
+        drawArray.forEach(circle =>{
             //eerste controleren of de bolletjes al bezet zijn door een ander stukje
             circle.element.classList.add("taken");
             circle.element.style.backgroundColor = piece.color;
