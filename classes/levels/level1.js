@@ -1,8 +1,5 @@
 import Circle from "./circle.js";
-import {playPiece, makeLevelPiece, makeDangerPiece} from "./level.js";
-import { boardArray } from "./level.js";
-
-
+import {defineBoards, playPiece, makeLevelPiece} from "./level.js";
 
 
 // stukjes upside down
@@ -174,117 +171,8 @@ rotate.addEventListener('click', () =>{
 });
 
 
-const refresh = document.querySelector('#refresh');
-refresh.addEventListener('click', ()=> {
-    location.reload();
-})
-
-
-
-
 const currentURL = window.location.href;
 
 const url = new URL(currentURL);
 const levelParam = url.searchParams.get('level');
 const levelNumber = levelParam.replace('level', '');
-
-console.log(levelNumber);
-
-
-let piecesArray = [];
-
-
-
-if (levelNumber === '1') {
-
-    piecesArray = playPiece(['piece11', 'piece13', 'piece9', ], boardArray[0]);
-
-    
-
-
-    makeLevelPiece([0,1,2,3,4], 'red');
-    makeLevelPiece([8,9,12], 'lightblue');
-    makeLevelPiece([5,6,7,10,14], 'green');
-    makeLevelPiece([15,11,24,20,21], 'purple');
-    makeLevelPiece([28,29,30,31,25], 'yellow');
-    makeLevelPiece([27,40,44,45,46], 'pink');
-    makeLevelPiece([17,18,22,23,26], 'orange');
-    makeLevelPiece([32,36,37,41], 'darkred');
-    makeLevelPiece([38,42,43,56,60], 'darkblue');
-
-    makeDangerPiece([13,16,19,33,47,57,63]);
-} else if(levelNumber === '2') {
-
-
-    piecesArray = playPiece(['piece11', 'piece12', 'piece13' ], boardArray[0]);
-
-    makeLevelPiece([0,4,8,12,13], 'red');
-    makeLevelPiece([2,6,7], 'lightblue');
-    makeLevelPiece([28,29,25,26,22], 'purple');
-    makeLevelPiece([17,18,19,23,32], 'yellow');
-    makeLevelPiece([1,5,9,10,14], 'pink');
-    makeLevelPiece([16,20,24,11,21], 'orange');
-    makeLevelPiece([27,31,40,36], 'darkred');
-    makeLevelPiece([33,34,38,42,43], 'darkblue');
-    makeLevelPiece([37,41,45,46,47], 'cyan');
-
-    makeDangerPiece([3,15,30,44,39,60, 53])
-
-} else if(levelNumber === '3') {
-
-
-    piecesArray = playPiece(['piece3', 'piece6', 'piece5', 'piece2', 'piece7' ], boardArray[0]);
-
-    makeLevelPiece([18,19,23,27,26], 'lightgreen');
-    makeLevelPiece([32,33,34,36,40], 'lightblue');
-    makeLevelPiece([44,45,41,37,38], 'blue');
-    makeLevelPiece([39,43,47,46,60], 'lightgreen');
-    makeLevelPiece([49,53,52,54,56], 'orange');
-    makeLevelPiece([63,62,61,59,58], 'cyan');
-    makeLevelPiece([51,50,55], 'lightblue');
-    
-
-
-    makeDangerPiece([1,28,31,42,35,48, 57])
-
-} else if(levelNumber === '4') {
-
-
-    piecesArray = playPiece(['piece10', 'piece13', 'piece2', 'piece6', 'piece12', 'piece7', 'piece9' ], boardArray[0]);
-
-    makeLevelPiece([0,1,4,5,8], 'lightgreen');
-    makeLevelPiece([2,3,6,10,9], 'darkblue');
-    makeLevelPiece([15,14,13,12,11], 'red');
-    makeLevelPiece([28,29,30,31,25], 'yellow');
-    makeLevelPiece([44,41,40,42,37], 'orange');
-
-
-    makeDangerPiece([7,16,24,45,46,60,58])
-
-}
-
-else if(levelNumber === '5') {
-
-
-    piecesArray = playPiece(['piece2', 'piece3', 'piece4', 'piece5', 'piece6', 'piece7', 'piece8','piece9', 'piece10', 'piece11', 'piece12', 'piece13' ], boardArray[0]);
-
-    makeLevelPiece([18,19,22], 'lightblue');
-
-
-
-    makeDangerPiece([12,7,16,28,44,37,49])
-
-}
-
-  
-
-
-
-
-
-
-
-
-
-
-

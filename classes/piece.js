@@ -1,4 +1,4 @@
-import boardArray from "./main.js";
+import {boardArray} from "./level.js";
 class Piece {
 
 
@@ -6,7 +6,6 @@ class Piece {
         this._selected = null;
         this.name = name;
         this.posities = posities;
-        this.parent = parent;
         this.color = color;
         this.circles = circles;
         this.element = document.createElement('div');
@@ -35,6 +34,7 @@ class Piece {
         this.currentY = 0;
         this.initialLeft = 0;
         this.initialTop = 0;
+        this.end = true;
 
     }
 
@@ -140,19 +140,21 @@ class Piece {
 
         this.isDragging = false;
 
-        let didYouWIn = true;
+        let didYouWin = true;
 
         boardArray.forEach(board => {
-            board.circles.forEach( circle => {
-                if(!circle.element.classList.contains('taken')) {
-                    didYouWIn = false;
-                }
-            })
-        })
-
-        if(didYouWIn) {
-            window.alert('You won! Congrats');
+          board.circles.forEach(circle => {
+            if (!circle.element.classList.contains('taken')) {
+              didYouWin = false;
+            }
+          });
+        });
+        
+        if (didYouWin) {
+          window.alert('You won! Congrats');
+          window.location.href = `levels.html`;
         }
+        
     }
 
 

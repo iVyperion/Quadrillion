@@ -1,5 +1,5 @@
 import Circle from "./circle.js";
-import boardArray from "./main.js";
+import {boardArray} from "./level.js";
 
 let id = 0;
 
@@ -43,6 +43,14 @@ class Board{
 
 
     }
+
+
+
+
+
+
+
+
 
     drawBoard (container, id){
         this.element.classList.add(`board${id}`);
