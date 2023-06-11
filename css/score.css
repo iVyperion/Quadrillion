@@ -10,7 +10,8 @@
     margin: 0 auto;
     width: 75%;
     max-height: 40vh;
-    overflow: scroll;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 table, th, td {

@@ -18,6 +18,10 @@ body {
     background-color: var(--bg);
 }
 
+button {
+    cursor: pointer;
+}
+
 main {
     margin-top: 2rem;
     margin-bottom: 5rem;

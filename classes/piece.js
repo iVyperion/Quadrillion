@@ -1,8 +1,9 @@
-import {boardArray} from "./level.js";
+import { boardArray } from "./level.js";
+import { startTimer, stopTimer, postScore } from "./helpers.js";
 class Piece {
 
 
-    constructor(circles, name, color, parent,posities) {
+    constructor(circles, name, color, parent, posities) {
         this._selected = null;
         this.name = name;
         this.posities = posities;
@@ -41,7 +42,7 @@ class Piece {
 
 
 
-    onMouseDown(circle, event){
+    onMouseDown(circle, event) {
 
         //this.posities.forEach(positie=>{
         //console.log("voor x: " + positie[0], "voor y: " + positie[1]);
@@ -79,11 +80,11 @@ class Piece {
         //})
     }
 
-    onMouseMove(event){
+    onMouseMove(event) {
         event.preventDefault();
-        if(this.isDragging) {
+        if (this.isDragging) {
 
-            this.element.style.opacity  = 0.8;
+            this.element.style.opacity = 0.8;
 
             // waar is de nieuwe postie van het stukje
             const deltaX = event.clientX - this.startX;
@@ -100,39 +101,39 @@ class Piece {
     }
 
 
-    onMouseUp(event){
+    onMouseUp(event) {
         event.preventDefault();
 
-        if(this.isDragging){
+        if (this.isDragging) {
 
             let uitHetBord = false;
 
             let bordIndex = -1;
 
             // eerste kijken op welk bord we hem moeten plaatsen
-            for(let i = 0 ; i < boardArray.length ; i++){
+            for (let i = 0; i < boardArray.length; i++) {
                 let x = boardArray[i].element.getBoundingClientRect().left;
                 let y = boardArray[i].element.getBoundingClientRect().top;
 
-                if(event.clientX > x && event.clientX < x + boardArray[i].width && event.clientY > y && event.clientY < y + boardArray[i].height){
+                if (event.clientX > x && event.clientX < x + boardArray[i].width && event.clientY > y && event.clientY < y + boardArray[i].height) {
                     bordIndex = i;
                     uitHetBord = true;
                 }
 
             }
-            if(uitHetBord) {
+            if (uitHetBord) {
                 let uitkomst = boardArray[bordIndex].drawPattern(this, this._selected);
                 console.log(uitkomst);
-                if(uitkomst){
+                if (uitkomst) {
                     this.element.remove();
                 } else {
                     console.log('Stukje word terug gezet naar de vorige postitie')
-                    this.element.style.left = 0 +"px";
+                    this.element.style.left = 0 + "px";
                     this.element.style.top = 0 + 'px';
                 }
             } else {
                 console.log('Stukje word terug gezet naar de vorige postitie')
-                this.element.style.left = 0 +"px";
+                this.element.style.left = 0 + "px";
                 this.element.style.top = 0 + 'px';
             }
 
@@ -143,18 +144,29 @@ class Piece {
         let didYouWin = true;
 
         boardArray.forEach(board => {
-          board.circles.forEach(circle => {
-            if (!circle.element.classList.contains('taken')) {
-              didYouWin = false;
-            }
-          });
+            board.circles.forEach(circle => {
+                if (!circle.element.classList.contains('taken')) {
+                    didYouWin = false;
+                }
+            });
         });
-        
+        let finish = localStorage.getItem('isMouseUp');
         if (didYouWin) {
-          window.alert('You won! Congrats');
-          window.location.href = `levels.html`;
-        }
+            console.log(finish)
+            if (finish == "false") {
+                console.log('hier')
+                localStorage.setItem('isMouseUp', "true");
+                stopTimer(localStorage.getItem('timerid'));
+                let person = window.prompt('You won! please enter your name:');
+                localStorage.setItem('name', person);
+                console.log(person, didYouWin);
+                postScore(person, localStorage.getItem('timervalue'));
+                window.location.href = `levels.html`;
+            }
         
+        }
+
+
     }
 
 

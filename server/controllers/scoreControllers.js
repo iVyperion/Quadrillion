@@ -2,7 +2,7 @@ import { pool as db } from '../db.js';
 
 export const getScores = async (req, res, next) => {
     try {
-        let sql = `SELECT * FROM scores ORDER BY time DESC`
+        let sql = `SELECT * FROM scores ORDER BY time ASC`
         let [scores, _] = await db.execute(sql)
 
         res.status(200).json({status: 'success', scores})
@@ -16,7 +16,7 @@ export const getScoresbyName = async (req, res, next) => {
     try {
         let name = req.params.name
         let values = [name]
-        let sql = `SELECT * FROM scores WHERE name = ?`
+        let sql = `SELECT * FROM scores WHERE name = ? ORDER BY timestamp ASC`
         let [scores, _] = await db.execute(sql, values)
 
         res.status(200).json({status: 'success', scores: scores})

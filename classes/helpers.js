@@ -85,3 +85,20 @@ export const convertSecondsToTime = function (seconds) {
 
     return result;
 }
+export const startTimer = function () {
+    let timer = document.querySelector('#timer');
+    let seconds = 0;
+    let intervalId = setInterval(() => {
+        seconds++;
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        const timerDisplay = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        timer.innerHTML = timerDisplay;
+        localStorage.setItem('timervalue', seconds);
+    }, 1000);
+    return intervalId;
+}
+export const stopTimer = function (id) {
+    
+    clearInterval(id)
+}
